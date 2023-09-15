@@ -161,34 +161,36 @@ function renderWatchlist() {
   const watchlistContainer = document.getElementById("watchlist");
   const placeholderContainer = document.querySelector(".movies-placeholder");
 
-  if (watchlist.length === 0) {
-    watchlistContainer.classList.add("hidden");
-    placeholderContainer.classList.remove("hidden");
-  } else {
-    watchlistContainer.classList.remove("hidden");
-    placeholderContainer.classList.add("hidden");
+  if (watchlistContainer) {
+    if (watchlist.length === 0) {
+      watchlistContainer.classList.add("hidden");
+      placeholderContainer.classList.remove("hidden");
+    } else {
+      watchlistContainer.classList.remove("hidden");
+      placeholderContainer.classList.add("hidden");
 
-    const watchlistHtml = watchlist
-      .map((movie) =>
-        generateMovieHtml({
-          ...movie,
-          removeFromWatchlistButton: `<button class="remove-from-watchlist">
+      const watchlistHtml = watchlist
+        .map((movie) =>
+          generateMovieHtml({
+            ...movie,
+            removeFromWatchlistButton: `<button class="remove-from-watchlist">
           <i class="fa-solid fa-circle-minus"></i> Remove
         </button>`,
-        })
-      )
-      .join("");
+          })
+        )
+        .join("");
 
-    watchlistContainer.innerHTML = watchlistHtml;
+      watchlistContainer.innerHTML = watchlistHtml;
 
-    const removeButtons = document.querySelectorAll(".remove-from-watchlist");
-    removeButtons.forEach((button) => {
-      button.addEventListener("click", (event) => {
-        const movieElement = event.target.closest(".movie");
-        const imdbID = movieElement.dataset.imdbid;
-        removeFromWatchlist(imdbID);
+      const removeButtons = document.querySelectorAll(".remove-from-watchlist");
+      removeButtons.forEach((button) => {
+        button.addEventListener("click", (event) => {
+          const movieElement = event.target.closest(".movie");
+          const imdbID = movieElement.dataset.imdbid;
+          removeFromWatchlist(imdbID);
+        });
       });
-    });
+    }
   }
 }
 
@@ -199,6 +201,9 @@ function addWatchlistEventListeners() {
   });
 }
 
-if (window.location.pathname.endsWith("movies.html")) {
+if (
+  window.location.pathname.endsWith("movies") ||
+  window.location.pathname.endsWith("movies.html")
+) {
   renderWatchlist();
 }
