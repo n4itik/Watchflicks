@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Favicon -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="favicon/site.webmanifest" />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Primary Meta Tags -->
+    <title>Watchflicks</title>
+    <meta name="title" content="Watchflicks" />
+    <meta name="description" content="Movie Watchlist" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://watchflicks.netlify.app" />
+    <meta property="og:title" content="Watchflicks" />
+    <meta property="og:description" content="Movie Watchlist" />
+    <meta
+      property="og:image"
+      content="https://watchflicks.netlify.app/images/preview.jpg"
+    />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://watchflicks.netlify.app" />
+    <meta property="twitter:title" content="Watchflicks" />
+    <meta property="twitter:description" content="Movie Watchlist" />
+    <meta
+      property="twitter:image"
+      content="https://watchflicks.netlify.app/images/preview.jpg"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <div class="wrapper">
+          <div class="header-title">
+            <h1>Find your film</h1>
+            <a href="movies.html">My Watchlist</a>
+          </div>
+        </div>
+      </div>
+      <div class="search-form-container">
+        <div class="wrapper">
+          <form id="search-form">
+            <div class="search-field">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input
+                id="movie-input"
+                type="text"
+                placeholder="Search a film"
+                required
+              />
+            </div>
+            <button type="submit" id="submit-btn">Search</button>
+          </form>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="wrapper">
+        <div id="search-results" class="movies-list hidden"></div>
+        <div class="movies-placeholder">
+          <div class="movies-placeholder-content">
+            <img
+              class="placeholder-img"
+              src="images/placeholder.png"
+              aria-hidden="true"
+            />
+            <p class="empty-list-msg">Start exploring</p>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="/script.js" type="module"></script>
+  </body>
+</html>
