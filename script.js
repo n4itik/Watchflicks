@@ -5,6 +5,7 @@ const moviesPlaceholder = document.querySelector(".movies-placeholder");
 const moviesPlaceholderContent = document.querySelector(
   ".movies-placeholder-content"
 );
+let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
 
 if (searchForm) {
   searchForm.addEventListener("submit", (e) => {
@@ -99,14 +100,20 @@ function renderMovies(movies) {
     return;
   }
   const moviesHtml = movies
-    .map((movie) =>
-      generateMovieHtml({
+    .map((movie) => {
+      const isMovieInWatchlist = watchlist.some(
+        (m) => m.imdbID === movie.imdbID
+      );
+
+      return generateMovieHtml({
         ...movie,
-        addToWatchlistButton: `<button class="add-to-watchlist">
-        <i class="fa-solid fa-circle-plus"></i> Watchlist
-      </button>`,
-      })
-    )
+        addToWatchlistButton: `<button class="add-to-watchlist ${
+          isMovieInWatchlist ? "disabled" : ""
+        }">
+          <i class="fa-solid fa-circle-plus"></i> Watchlist
+        </button>`,
+      });
+    })
     .join("");
 
   moviesList.classList.remove("hidden");
@@ -120,9 +127,9 @@ function renderMovies(movies) {
 }
 
 function addToWatchlist(event) {
+  const button = event.target;
   const movieElement = event.target.closest(".movie");
   const imdbID = movieElement.dataset.imdbid;
-  const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
   const isMovieInWatchlist = watchlist.some((movie) => movie.imdbID === imdbID);
 
   if (!isMovieInWatchlist) {
@@ -146,18 +153,17 @@ function addToWatchlist(event) {
       .catch((error) => {
         console.error(error);
       });
+    button.classList.add("disabled");
   }
 }
 
 function removeFromWatchlist(imdbID) {
-  let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
   watchlist = watchlist.filter((movie) => movie.imdbID !== imdbID);
   localStorage.setItem("watchlist", JSON.stringify(watchlist));
   renderWatchlist();
 }
 
 function renderWatchlist() {
-  const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
   const watchlistContainer = document.getElementById("watchlist");
   const placeholderContainer = document.querySelector(".movies-placeholder");
 
